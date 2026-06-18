@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024-2025年江西高考普通类本科批投档智能分析系统【物理组】</title>
+    <!-- 引入 Tailwind CSS 进行极简高端设计 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- 引入 Inter/Noto Sans 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e4e4e7;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen transition-colors duration-200">
+
+    <!-- 悬浮通知弹窗 (取代禁用的 alert) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- 顶栏导航 -->
+    <header class="sticky top-0 z-40 w-full border-b border-zinc-200/80 bg-white/80 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-900/80 transition-colors duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-gradient-to-tr from-indigo-500 to-purple-600 rounded-xl text-white shadow-md shadow-indigo-500/10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">江西高考普通本科批投档智能分析系统</h1>
+                    <p class="text-xs text-zinc-500 dark:text-zinc-400">2024-2025年常规平行志愿投档数据监测 · 物理组</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- 暗黑/浅色模式切换 -->
+                <button id="theme-toggle" class="p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+                    <svg id="theme-sun" class="w-5 h-5 hidden text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 17.95a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" clip-rule="evenodd"/></svg>
+                    <svg id="theme-moon" class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                </button>
+                <a href="#table-container" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-sm">
+                    浏览全部数据
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- 数据大盘总览 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">收录院校专业组</p>
+                        <h3 class="text-3xl font-extrabold mt-1 tracking-tight" id="stat-total-groups">464</h3>
+                    </div>
+                    <span class="p-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-500 dark:text-indigo-400 rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </span>
+                </div>
+                <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-2">100% 完整收录物理组本科批数据</p>
+            </div>
+            
+            <div class="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">重点名校专业组</p>
+                        <h3 class="text-3xl font-extrabold mt-1 tracking-tight" id="stat-key-groups">342</h3>
+                    </div>
+                    <span class="p-2 bg-yellow-50 dark:bg-yellow-950/40 text-yellow-500 dark:text-yellow-400 rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.961 0 1.362 1.248.58 1.81l-3.97 2.883a1 1 0 00-.364 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.971-2.883a1 1 0 00-1.175 0l-3.97 2.883c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.58-1.81h4.908a1 1 0 00.95-.69l1.519-4.674z"/></svg>
+                    </span>
+                </div>
+                <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-2">覆盖 985 / 211 / 双一流高校</p>
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">2025投档最高分</p>
+                        <h3 class="text-3xl font-extrabold mt-1 tracking-tight" id="stat-max-score">673 <span class="text-sm font-normal text-zinc-500">分</span></h3>
+                    </div>
+                    <span class="p-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 dark:text-emerald-400 rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </span>
+                </div>
+                <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-2">北京大学501组 (省排位 52 名)</p>
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">智能包含专业覆盖率</p>
+                        <h3 class="text-3xl font-extrabold mt-1 tracking-tight">100%</h3>
+                    </div>
+                    <span class="p-2 bg-purple-50 dark:bg-purple-950/40 text-purple-500 dark:text-purple-400 rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </span>
+                </div>
+                <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-2">每个专业组深度解析包含的主力专业</p>
+            </div>
+        </div>
+
+        <!-- 智能志愿冲稳保分析器 -->
+        <div class="bg-gradient-to-tr from-indigo-900 via-zinc-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl mb-8 border border-indigo-800/50">
+            <div class="max-w-3xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/20 text-indigo-300 border border-indigo-400/20 mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+                    智能志愿梯度评估器
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">输入您的物理类分数，一键进行「冲稳保」匹配</h2>
+                <p class="text-sm text-indigo-200 mt-2 leading-relaxed">
+                    系统将以2025年江西物理组实际投档线作为黄金锚点，进行大数梯度精算。同时为您搜寻出可能包含您喜爱专业的目标高校。
+                </p>
+            </div>
+            
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                <div class="md:col-span-4">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-indigo-300 mb-2">我的高考物理类分数</label>
+                    <div class="relative rounded-xl shadow-sm">
+                        <input type="number" id="user-score" min="500" max="750" placeholder="例：615" class="block w-full rounded-xl border-0 bg-white/10 py-3.5 pl-4 pr-12 text-white placeholder-indigo-300/60 focus:bg-white focus:text-zinc-950 focus:ring-2 focus:ring-white transition-all text-lg font-bold">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                            <span class="text-indigo-300 font-semibold" id="score-unit">分</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-4">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-indigo-300 mb-2">或：对应全省位次 (选填)</label>
+                    <div class="relative rounded-xl shadow-sm">
+                        <input type="number" id="user-rank" placeholder="例：4800" class="block w-full rounded-xl border-0 bg-white/10 py-3.5 pl-4 pr-12 text-white placeholder-indigo-300/60 focus:bg-white focus:text-zinc-950 focus:ring-2 focus:ring-white transition-all text-lg font-bold">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                            <span class="text-indigo-300 font-semibold">名</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 flex gap-3">
+                    <button id="btn-predict" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white transition-all font-bold px-6 py-3.5 rounded-xl shadow-md text-center hover:-translate-y-0.5 active:translate-y-0">
+                        开始诊断评估
+                    </button>
+                    <button id="btn-clear-predict" class="px-4 py-3.5 bg-white/10 hover:bg-white/20 transition-colors rounded-xl font-medium text-white" title="清除预测">
+                        重置
+                    </button>
+                </div>
+            </div>
+
+            <!-- 预测结果指标卡 (默认隐藏) -->
+            <div id="predict-dashboard" class="hidden mt-8 pt-6 border-t border-indigo-500/30 grid grid-cols-2 sm:grid-cols-4 gap-4 animate-fadeIn">
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10 text-center cursor-pointer hover:bg-white/10 transition-all" onclick="setQuickGradientFilter('冲')">
+                    <p class="text-xs text-indigo-300">冲刺名校 (冲)</p>
+                    <div class="flex items-center justify-center gap-2 mt-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                        <span class="text-2xl font-bold" id="cnt-chong">0</span>
+                        <span class="text-xs text-zinc-300">个</span>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10 text-center cursor-pointer hover:bg-white/10 transition-all" onclick="setQuickGradientFilter('稳')">
+                    <p class="text-xs text-indigo-300">稳妥稳守 (稳)</p>
+                    <div class="flex items-center justify-center gap-2 mt-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                        <span class="text-2xl font-bold" id="cnt-wen">0</span>
+                        <span class="text-xs text-zinc-300">个</span>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10 text-center cursor-pointer hover:bg-white/10 transition-all" onclick="setQuickGradientFilter('保')">
+                    <p class="text-xs text-indigo-300">保底之选 (保)</p>
+                    <div class="flex items-center justify-center gap-2 mt-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        <span class="text-2xl font-bold" id="cnt-bao">0</span>
+                        <span class="text-xs text-zinc-300">个</span>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10 text-center cursor-pointer hover:bg-white/10 transition-all" onclick="setQuickGradientFilter('垫')">
+                    <p class="text-xs text-indigo-300">防滑垫底 (垫)</p>
+                    <div class="flex items-center justify-center gap-2 mt-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                        <span class="text-2xl font-bold" id="cnt-dian">0</span>
+                        <span class="text-xs text-zinc-300">个</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心交互区 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 左侧控制面板与草稿箱 -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- 收藏草稿箱 -->
+                <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800">
+                        <h3 class="font-bold flex items-center gap-2 text-zinc-800 dark:text-zinc-100">
+                            <span class="p-1.5 bg-yellow-500/10 text-yellow-500 rounded-lg">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            </span>
+                            志愿备选收藏库 (<span id="draft-count">0</span>)
+                        </h3>
+                        <button id="btn-clear-drafts" class="text-xs text-red-500 hover:text-red-600 font-medium transition-colors">
+                            全部清空
+                        </button>
+                    </div>
+
+                    <!-- 备选草稿列表容器 -->
+                    <div id="draft-list-container" class="mt-4 max-h-80 overflow-y-auto space-y-2.5 text-sm">
+                        <!-- 空草稿箱占位 -->
+                        <div id="drafts-empty-placeholder" class="text-center py-8 text-zinc-400 dark:text-zinc-500">
+                            <p class="text-xs">还没有添加备选志愿</p>
+                            <p class="text-[11px] mt-1">在右侧数据表中点击“收藏”按钮加入此库</p>
+                        </div>
+                    </div>
+
+                    <!-- 志愿草稿箱导出控制 -->
+                    <div id="drafts-actions" class="hidden mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 grid grid-cols-2 gap-2">
+                        <button onclick="copyDraftsText()" class="w-full flex items-center justify-center gap-1 py-2 px-3 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg text-xs font-semibold transition-colors">
+                            一键复制志愿草稿
+                        </button>
+                        <button onclick="printDraftsTable()" class="w-full flex items-center justify-center gap-1 py-2 px-3 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-lg text-xs font-semibold transition-colors">
+                            一键打印志愿表
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 筛选面板 -->
+                <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
+                        <h3 class="font-bold flex items-center gap-2 text-zinc-800 dark:text-zinc-100 text-sm">
+                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                            高级条件过滤
+                        </h3>
+                        <button id="btn-reset-filters" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline">
+                            重置全部
+                        </button>
+                    </div>
+
+                    <!-- 院校层次 -->
+                    <div>
+                        <span class="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">院校层级标签</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleLevelFilter('985')" id="tag-985" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
+                                985高校 ★
+                            </button>
+                            <button onclick="toggleLevelFilter('211')" id="tag-211" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
+                                211院校 ▲
+                            </button>
+                            <button onclick="toggleLevelFilter('双一流')" id="tag-double" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
+                                双一流 ●
+                            </button>
+                            <button onclick="toggleLevelFilter('普通')" id="tag-normal" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
+                                普通公办
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 专业组性质 -->
+                    <div>
+                        <span class="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">专业组类型性质</span>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+                                <input type="checkbox" name="group-type" value="普通批" class="rounded border-zinc-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500" checked>
+                                <span>常规普通专业组</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+                                <input type="checkbox" name="group-type" value="国家专项" class="rounded border-zinc-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500" checked>
+                                <span>国家专项计划组</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+                                <input type="checkbox" name="group-type" value="中外合作" class="rounded border-zinc-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500" checked>
+                                <span>中外合作办学组</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+                                <input type="checkbox" name="group-type" value="专项" class="rounded border-zinc-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500" checked>
+                                <span>地方与苏区专项组</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+                                <input type="checkbox" name="group-type" value="医护" class="rounded border-zinc-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500" checked>
+                                <span>医学护理/口腔单列组</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 波动率断档爆冷筛选 -->
+                    <div>
+                        <span class="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">投档异动监测 (24 vs 25)</span>
+                        <div class="grid grid-cols-1 gap-2">
+                            <button id="btn-show-cold" onclick="toggleTrendFilter('cold')" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 transition-all">
+                                <span>📉 爆冷断档组 (位次暴跌 >1000)</span>
+                                <span class="text-[10px] bg-emerald-100 dark:bg-emerald-950 px-1.5 py-0.5 rounded" id="cnt-cold-badge">0</span>
+                            </button>
+                            <button id="btn-show-hot" onclick="toggleTrendFilter('hot')" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all">
+                                <span>📈 竞争激增组 (位次暴涨 >1000)</span>
+                                <span class="text-[10px] bg-rose-100 dark:bg-rose-950 px-1.5 py-0.5 rounded" id="cnt-hot-badge">0</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 分数区间精准过滤 -->
+                    <div>
+                        <span class="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">25年最低投档分数段</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-[10px] text-zinc-400">最低分</label>
+                                <input type="number" id="filter-score-min" min="500" max="750" placeholder="579" class="w-full text-xs p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-zinc-400">最高分</label>
+                                <input type="number" id="filter-score-max" min="500" max="750" placeholder="673" class="w-full text-xs p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧数据表格 -->
+            <div class="lg:col-span-8 space-y-4" id="table-container">
+                
+                <!-- 实时检索框及配置 -->
+                <div class="bg-white dark:bg-zinc-900 p-4 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div class="relative w-full md:max-w-md">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-zinc-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </span>
+                        <input type="text" id="search-input" placeholder="输入代码、学校、专业名称（如: 计算机、口腔）..." class="block w-full text-sm pl-10 pr-4 py-2.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all">
+                    </div>
+
+                    <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                        <span class="text-xs text-zinc-400" id="filtered-stats-lbl">正在显示 464 / 464 条记录</span>
+                        
+                        <select id="items-per-page" class="text-xs p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 focus:outline-none">
+                            <option value="15">15 条/页</option>
+                            <option value="30" selected>30 条/页</option>
+                            <option value="50">50 条/页</option>
+                            <option value="100">100 条/页</option>
+                            <option value="all">显示全部</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 投档数据表格外容器 -->
+                <div class="overflow-x-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+                                <th class="py-4 px-4 text-center w-12">序号</th>
+                                <th class="py-4 px-4 w-20 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800" onclick="handleSort('code')">代号 <span id="sort-code"></span></th>
+                                <th class="py-4 px-4 min-w-[280px] cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800" onclick="handleSort('name')">高校、专业组及包含专业 <span id="sort-name"></span></th>
+                                <th class="py-4 px-4 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 text-center w-28" onclick="handleSort('score25')">25最低线/排位 <span id="sort-score25"></span></th>
+                                <th class="py-4 px-4 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 text-center w-28" onclick="handleSort('score24')">24最低线/排位 <span id="sort-score24"></span></th>
+                                <th class="py-4 px-4 text-center w-28 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800" onclick="handleSort('trend')">位次走势分析 <span id="sort-trend"></span></th>
+                                <th class="py-4 px-4 text-center w-16">收藏</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body" class="divide-y divide-zinc-200 dark:divide-zinc-800 text-sm">
+                            <!-- 数据行将通过JavaScript动态渲染 -->
+                        </tbody>
+                    </table>
+
+                    <!-- 空查询占位 -->
+                    <div id="table-empty-placeholder" class="hidden text-center py-20 text-zinc-400 dark:text-zinc-500">
+                        <svg class="w-12 h-12 mx-auto text-zinc-300 dark:text-zinc-700 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <p class="font-medium">未匹配到符合当前过滤条件的数据</p>
+                        <p class="text-xs mt-1">请尝试放宽检索关键字、位次、分数段或取消专项限定</p>
+                    </div>
+                </div>
+
+                <!-- 分页控制 -->
+                <div id="pagination-controls" class="flex items-center justify-between py-2">
+                    <button id="btn-prev-page" class="px-4 py-2 text-xs font-semibold bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl transition-all disabled:opacity-50">
+                        上一页
+                    </button>
+                    <span id="page-num-lbl" class="text-xs text-zinc-500 dark:text-zinc-400">第 1 / 16 页</span>
+                    <button id="btn-next-page" class="px-4 py-2 text-xs font-semibold bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl transition-all disabled:opacity-50">
+                        下一页
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-400 dark:text-zinc-500 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <p>© 2026 江西高考志愿大数据智能诊断填报规划系统.</p>
+            <p class="mt-1">投档数据来源于江西省教育考试院普通本科批常规平行志愿投档统计，专业组所含专业根据历年招生大纲与高校招生特色动态模拟生成，仅供参考，正式报考请遵循当年最新纸质招生计划大纲。</p>
+        </div>
+        <div class="flex gap-4">
+            <span class="flex items-center gap-1">★ 985高校</span>
+            <span class="flex items-center gap-1">▲ 211院校</span>
+            <span class="flex items-center gap-1">● 双一流学科</span>
+        </div>
+    </footer>
+
+    <script>
+    // 原始数据: [序号, 院校代号, 院校名称, 专业组名称, 25投档线, 25排位, 24投档线, 24排位]
+    // 采用 null 代表数据中的“—”
+    const DATABASE = [
+        [1,"1003","北京大学★●","501组",673,52,680,37],
+        [2,"1006","清华大学★●","502组",672,54,null,null],
+        [3,"1283","上海交通大学★●","501组",671,59,679,48],
+        [4,"1296","复旦大学医学院★●","501组",667,130,671,143],
+        [5,"1006","清华大学★●","561组(国家专项)",666,137,null,null],
+        [6,"1003","北京大学★●","562组(国家专项)",664,185,null,null],
+        [7,"1293","上海交通大学医学院★●","501组",663,198,674,103],
+        [8,"1003","北京大学★●","561组(国家专项)",661,256,667,228],
+        [9,"1281","复旦大学★●","501组",659,283,665,256],
+        [10,"1351","浙江大学★●","501组",659,296,662,338],
+        [11,"1241","哈尔滨工业大学★●","503组",658,326,654,689],
+        [12,"1283","上海交通大学★●","502组",657,341,665,273],
+        [13,"1031","中国科学院大学","501组",656,361,null,null],
+        [14,"1382","中国科学技术大学★●","501组",656,365,664,293],
+        [15,"1382","中国科学技术大学★●","502组",653,473,659,475],
+        [16,"1283","上海交通大学★●","503组(中外合作)",652,503,null,null],
+        [17,"1382","中国科学技术大学★●","503组",652,517,null,null],
+        [18,"1005","中国人民大学★●","501组",651,533,null,null],
+        [19,"1241","哈尔滨工业大学★●","504组",651,566,null,null],
+        [20,"1004","北京大学医学部★","561组(国家专项)",650,582,649,999],
+        [21,"1794","四川大学★●","503组",649,630,null,null],
+        [22,"1281","复旦大学★●","561组(国家专项)",649,650,655,635],
+        [23,"1022","北京航空航天大学★●","501组",648,714,653,764],
+        [24,"1023","北京理工大学★●","502组",647,738,654,705],
+        [25,"1602","中南大学★●","504组",647,763,653,767],
+        [26,"1293","上海交通大学医学院★●","502组",646,787,658,497],
+        [27,"1671","哈尔滨工业大学(深圳)★●","501组",646,806,652,808],
+        [28,"1311","南京大学★●","501组",646,830,657,521],
+        [29,"1005","中国人民大学★●","502组",645,848,655,620],
+        [30,"1794","四川大学★●","504组",643,986,null,null],
+        [31,"1310","中国人民大学(苏州校区)★●","503组",643,1004,null,null],
+        [32,"1358","浙江大学医学院★●","501组",642,1081,646,1245],
+        [33,"1004","北京大学医学部★","501组",641,1138,662,362],
+        [34,"1023","北京理工大学★●","503组",641,1143,null,null],
+        [35,"1351","浙江大学★●","561组(国家专项)",641,1164,645,1333],
+        [36,"1382","中国科学技术大学★●","561组(国家专项)",640,1231,649,1035],
+        [37,"1542","武汉大学★●","502组",640,1254,null,null],
+        [38,"1312","东南大学★●","501组(1312代码组)",639,1338,646,1238],
+        [39,"1283","上海交通大学★●","561组(国家专项)",638,1384,642,1640],
+        [40,"1022","北京航空航天大学★●","561组(国家专项)",638,1448,640,1824],
+        [41,"1282","同济大学★●","501组",637,1469,641,1793],
+        [42,"1873","西安交通大学★●","502组",636,1550,645,1363],
+        [43,"1311","南京大学★●","561组(国家专项)",636,1563,639,1937],
+        [44,"1010","北京邮电大学▲●","501组(元培专业组)",635,1722,null,null],
+        [45,"1351","浙江大学★●","503组(中外合作)",635,1729,632,2917],
+        [46,"1662","华南理工大学★●","502组",633,1902,null,null],
+        [47,"1544","华中科技大学★●","501组",633,1928,636,2385],
+        [48,"1877","西北工业大学★●","501组",633,1934,636,2399],
+        [49,"1043","天津医科大学▲●","502组",632,2065,null,null],
+        [50,"1542","武汉大学★●","503组",631,2148,null,null],
+        [51,"1542","武汉大学★●","505组",630,2188,null,null],
+        [52,"1282","同济大学★●","502组",630,2299,639,1951],
+        [53,"1465","哈尔滨工业大学(威海)★●","501组",629,2371,633,2826],
+        [54,"1282","同济大学★●","504组",629,2404,636,2312],
+        [55,"1282","同济大学★●","503组",628,2480,637,2182],
+        [56,"1796","电子科技大学(沙河校区)★●","501组",628,2493,633,2747],
+        [57,"0601","国防科技大学★●","501组",628,2515,635,2519],
+        [58,"1542","武汉大学★●","501组",628,2519,633,2861],
+        [59,"1661","中山大学★●","503组",628,2551,null,null],
+        [60,"1005","中国人民大学★●","562组(国家专项)",628,2552,638,2080],
+        [61,"1542","武汉大学★●","504组",628,2557,null,null],
+        [62,"1293","上海交通大学医学院★●","505组(国家专项)",628,2570,639,1999],
+        [63,"1794","四川大学★●","502组",627,2637,null,null],
+        [64,"1544","华中科技大学★●","502组",627,2692,633,2851],
+        [65,"1318","南京航空航天大学▲●","501组(长空创新班)",627,2703,null,null],
+        [66,"1661","中山大学★●","502组",626,2755,636,2380],
+        [67,"1023","北京理工大学★●","561组(国家专项)",626,2784,632,2885],
+        [68,"1041","南开大学★●","501组",626,2804,634,2647],
+        [69,"1771","重庆大学★●","501组",626,2833,617,5837],
+        [70,"1671","哈尔滨工业大学(深圳)★●","502组",626,2870,631,3161],
+        [71,"1465","哈尔滨工业大学(威海)★●","502组",625,2991,620,5165],
+        [72,"1873","西安交通大学★●","504组",624,3080,627,3810],
+        [73,"1022","北京航空航天大学★●","502组(中外合作)",624,3090,631,3186],
+        [74,"1022","北京航空航天大学★●","502组",624,3097,635,2525],
+        [75,"1010","北京邮电大学▲●","502组",624,3114,629,3468],
+        [76,"1310","中国人民大学(苏州校区)★●","502组(中外合作)",624,3117,634,2628],
+        [77,"1671","哈尔滨工业大学(深圳)★●","561组(国家专项)",624,3128,639,1989],
+        [78,"1602","中南大学★●","503组",624,3157,624,4420],
+        [79,"1671","哈尔滨工业大学(深圳)★●","503组(中外合作)",624,3165,null,null],
+        [80,"1461","山东大学★●","506组",624,3169,null,null],
+        [81,"1421","厦门大学★●","503组",624,3185,null,null],
+        [82,"1792","电子科技大学★●","561组(国家专项)",623,3210,635,2482],
+        [83,"1351","浙江大学★●","502组(农林类组)",623,3301,627,3765],
+        [84,"1007","北京交通大学▲●","501组",622,3391,590,14868],
+        [85,"1192","大连理工大学★●","501组",622,3482,628,3669],
+        [86,"1242","哈尔滨工程大学▲●","505组",622,3485,null,null],
+        [87,"1792","电子科技大学★●","501组",621,3625,635,2472],
+        [88,"1319","苏州大学▲●","503组",621,3663,610,7688],
+        [89,"1296","复旦大学医学院★●","561组(国家专项)",621,3680,623,4597],
+        [90,"1007","北京交通大学▲●","502组",620,3706,628,3577],
+        [91,"1662","华南理工大学★●","501组",620,3789,null,null],
+        [92,"1661","中山大学★●","501组",620,3802,628,3603],
+        [93,"1873","西安交通大学★●","562组(国家专项)",620,3806,611,4959],
+        [94,"1221","吉林大学★●","503组",620,3813,629,3408],
+        [95,"0282","华东师范大学★●","504组",620,3838,619,5445],
+        [96,"1242","哈尔滨工程大学▲●","502组",620,3841,null,null],
+        [97,"1461","山东大学★●","504组",619,3927,null,null],
+        [98,"1545","武汉理工大学▲●","504组",619,3966,622,4723],
+        [99,"1005","中国人民大学★●","561组(国家专项)",619,3992,637,2253],
+        [100,"1310","中国人民大学(苏州校区)★●","501组(中外合作)",619,3994,631,3200],
+        [101,"1542","武汉大学★●","562组(国家专项)",618,4105,621,4946],
+        [102,"0282","华东师范大学★●","503组",618,4111,629,3382],
+        [103,"1542","武汉大学★●","561组(国家专项)",618,4158,627,3778],
+        [104,"1010","北京邮电大学▲●","562组(国家专项)",618,4236,621,5081],
+        [105,"1871","西安电子科技大学▲●","502组",618,4286,623,4582],
+        [106,"1358","浙江大学医学院★●","502组(中外合作组)",617,4301,627,3820],
+        [107,"1421","厦门大学★●","501组",617,4348,null,null],
+        [108,"1221","吉林大学★●","506组",617,4382,623,4628],
+        [109,"1662","华南理工大学★●","503组",617,4392,null,null],
+        [110,"2432","福建医科大学","501组",617,4400,null,null],
+        [111,"1873","西安交通大学★●","501组",617,4403,626,4039],
+        [112,"1282","同济大学★●","561组(国家专项)",617,4471,626,4030],
+        [113,"1242","哈尔滨工程大学▲●","506组",617,4474,null,null],
+        [114,"1601","湖南大学★●","502组",617,4494,619,5589],
+        [115,"1545","武汉理工大学▲●","503组",616,4535,null,null],
+        [116,"1242","哈尔滨工程大学▲●","504组",616,4543,null,null],
+        [117,"1221","吉林大学★●","508组",616,4626,628,3659],
+        [118,"1221","吉林大学★●","507组",616,4644,627,3756],
+        [119,"1461","山东大学★●","502组",616,4656,null,null],
+        [120,"1312","东南大学★●","561组(国家专项)",616,4667,621,4962],
+        [121,"1321","江南大学▲●","50D组",616,4703,null,null],
+        [122,"1242","哈尔滨工程大学▲●","507组",616,4711,null,null],
+        [123,"1421","厦门大学★●","502组",616,4726,null,null],
+        [124,"1545","武汉理工大学▲●","505组",615,4821,620,5279],
+        [125,"0004","北京师范大学★●","503组",615,4895,628,3700],
+        [126,"1242","哈尔滨工程大学▲●","503组",614,4989,null,null],
+        [127,"1023","北京理工大学★●","504组(中外合作·珠海)",614,4995,null,null],
+        [128,"1027","北京外国语大学▲●","503组",614,5018,611,7455],
+        [129,"1041","南开大学★●","561组(国家专项)",614,5047,626,3980],
+        [130,"1287","上海财经大学▲●","502组",614,5085,623,4487],
+        [131,"1318","南京航空航天大学▲●","502组",614,5104,617,5977],
+        [132,"1042","天津大学★●","501组",614,5145,627,3741],
+        [133,"1873","西安交通大学★●","561组(国家专项)",613,5210,621,5048],
+        [134,"0004","北京师范大学★●","501组",613,5212,623,4494],
+        [135,"1043","天津医科大学▲●","501组",613,5306,null,null],
+        [136,"2693","深圳理工大学","501组",613,5332,null,null],
+        [137,"1242","哈尔滨工程大学▲●","509组",613,5352,null,null],
+        [138,"4005","东南大学★●","501组(4005代码组)",613,5411,621,4916],
+        [139,"4001","武汉大学★●","503组(医护类)",612,5442,null,null],
+        [140,"1241","哈尔滨工业大学★●","561组(国家专项)",612,5443,628,3632],
+        [141,"1316","中国药科大学▲●","501组",612,5449,null,null],
+        [142,"1544","华中科技大学★●","561组(国家专项)",612,5526,619,5413],
+        [143,"0668","北京师范大学(珠海校区)★●","503组",612,5540,null,null],
+        [144,"1662","华南理工大学★●","504组",612,5552,null,null],
+        [145,"1242","哈bin工程大学▲●","508组",612,5603,null,null],
+        [146,"1771","重庆大学★●","502组",612,5613,620,5304],
+        [147,"1026","首都医科大学","501组",612,5634,623,4506],
+        [148,"1871","西安电子科技大学▲●","561组(国家专项)",612,5655,614,6588],
+        [149,"0668","北京师范大学(珠海校区)★●","504组",611,5691,null,null],
+        [150,"1794","四川大学★●","501组",611,5695,622,4861],
+        [151,"1287","上海财经大学▲●","501组",611,5821,615,6342],
+        [152,"1877","西北工业大学★●","503组(中外合作)",611,5824,null,null],
+        [153,"1242","哈尔滨工程大学▲●","508组",611,5828,null,null],
+        [154,"1007","北京交通大学▲●","503组",611,5892,626,4042],
+        [155,"1016","中央财经大学▲●","503组",610,5937,619,5590],
+        [156,"1771","重庆大学★●","564组(国家专项)",610,5940,null,null],
+        [157,"1317","南京理工大学▲●","501组",610,6032,614,6656],
+        [158,"0004","北京师范大学★●","562组(国家专项)",610,6047,620,5145],
+        [159,"1796","电子科技大学(沙河校区)★●","502组(中外合作)",610,6063,616,6118],
+        [160,"1241","哈尔滨工业大学★●","505组(中外合作)",610,6070,620,5207],
+        [161,"1016","中央财经大学▲●","562组(国家专项)",610,6113,615,6459],
+        [162,"1242","哈尔滨工程大学▲●","50A组",610,6116,null,null],
+        [163,"0282","华东师范大学★●","561组(国家专项)",609,6151,618,5712],
+        [164,"1664","暨南大学▲●","505组",609,6184,618,5697],
+        [165,"1877","西北工业大学★●","561组(国家专项)",609,6223,622,4879],
+        [166,"1661","中山大学★●","561组(国家专项)",609,6251,623,4595],
+        [167,"1601","湖南大学★●","501组",609,6260,605,9331],
+        [168,"1662","华南理工大学★●","505组",609,6306,null,null],
+        [169,"1421","厦门大学★●","561组(国家专项)",609,6313,616,6070],
+        [170,"1465","哈尔滨工业大学(威海)★●","561组(国家专项)",609,6329,612,7089],
+        [171,"2295","上海中医药大学","501组",608,6399,null,null],
+        [172,"1011","中国农业大学★●","502组",608,6464,615,6295],
+        [173,"0004","北京师范大学★●","561组(国家专项)",608,6469,622,4799],
+        [174,"1319","苏州大学▲●","502组",608,6505,631,3075],
+        [175,"1016","中央财经大学▲●","501组",608,6522,614,6679],
+        [176,"1871","西安电子科技大学▲●","501组",608,6578,617,5863],
+        [177,"1318","南京航空航天大学▲●","561组(国家专项)",608,6584,614,6568],
+        [178,"1461","山东大学★●","501组",607,6638,null,null],
+        [179,"1241","哈尔滨工业大学★●","501组(中外合作)",607,6647,615,6494],
+        [180,"1877","西北工业大学★●","502组(中外合作)",607,6760,607,8540],
+        [181,"1464","山东大学威海分校★●","502组",607,6761,616,6273],
+        [182,"1008","北京科技大学▲●","501组",607,6780,615,6511],
+        [183,"1241","哈尔滨工业大学★●","506组(中外合作)",607,6783,614,6620],
+        [184,"1017","对外经济贸易大学▲●","502组",607,6817,615,6313],
+        [185,"1321","江南大学▲●","50H组",607,6827,612,7246],
+        [186,"1287","上海财经大学▲●","562组(国家专项)",607,6865,615,6268],
+        [187,"1008","北京科技大学▲●","502组",606,6884,613,6981],
+        [188,"1008","北京科技大学▲●","503组",606,6891,613,6957],
+        [189,"1602","中南大学★●","506组",606,7016,617,5923],
+        [190,"1321","江南大学▲●","509组",606,7040,611,7523],
+        [191,"1192","大连理工大学★●","502组(中外合作)",606,7088,612,7129],
+        [192,"1010","北京邮电大学▲●","561组(国家专项)",606,7115,599,11240],
+        [193,"1242","哈尔滨工程大学▲●","501组",606,7134,null,null],
+        [194,"1796","电子科技大学(沙河校区)★●","503组(中外合作)",606,7150,614,6708],
+        [195,"1010","北京邮电大学▲●","503组(中外合作)",605,7355,null,null],
+        [196,"1321","江南大学▲●","50G组",605,7372,null,null],
+        [197,"1074","东北大学秦皇岛分校★●","502组",605,7404,610,7827],
+        [198,"1771","重庆大学★●","503组",605,7407,609,8148],
+        [199,"1196","东北大学★●","502组",604,7451,618,5659],
+        [200,"1321","江南大学▲●","50C组",604,7480,608,8298],
+        [201,"1873","西安交通大学★●","563组(国家专项)",604,7521,618,5745],
+        [202,"1002","华北电力大学(北京)▲●","502组",604,7592,611,7603],
+        [203,"1321","江南大学▲●","50A组",604,7691,608,8394],
+        [204,"1321","江南大学▲●","503组",603,7798,610,7700],
+        [205,"1321","江南大学▲●","50E组",603,7846,610,7875],
+        [206,"1321","江南大学▲●","50F组",603,7868,608,8447],
+        [207,"4008","华中科技大学★●","504组(法医组)",603,7905,null,null],
+        [208,"1464","山东大学威海分校★●","501组",603,7922,608,8208],
+        [209,"2201","大连医科大学","503组",603,7941,576,22000],
+        [210,"1290","上海大学▲●","561组(国家专项)",603,7991,608,8230],
+        [211,"1042","天津大学★●","561组(国家专项)",603,7998,612,7233],
+        [212,"1002","华北电力大学(北京)▲●","562组(国家专项)",603,8004,609,7962],
+        [213,"1221","吉林大学★●","505组",603,8014,null,null],
+        [214,"1017","对外经济贸易大学▲●","501组",602,8057,610,7751],
+        [215,"1321","江南大学▲●","50J组",602,8066,null,null],
+        [216,"1009","北京化工大学▲●","501组",602,8110,601,10776],
+        [217,"1011","中国农业大学★●","562组(国家专项)",602,8143,608,8169],
+        [218,"1321","江南大学▲●","505组",602,8145,606,8918],
+        [219,"1668","深圳大学","502组",602,8158,610,7759],
+        [220,"1072","华北电力大学(保定)▲●","502组",602,8172,603,9906],
+        [221,"1196","东北大学★●","501组",602,8228,610,7731],
+        [222,"1221","吉林大学★●","504组(国家专项)",602,8294,607,8702],
+        [223,"1793","西南财经大学▲●","562组(国家专项)",602,8330,605,9407],
+        [224,"0662","华南师范大学▲●","503组",601,8431,607,8484],
+        [225,"1321","江南大学▲●","506组",601,8432,610,7838],
+        [226,"1771","重庆大学★●","563组(国家专项)",601,8472,null,null],
+        [227,"1015","中国传媒大学▲●","506组",601,8486,null,null],
+        [228,"1318","南京航空航天大学▲●","503组(中外合作)",601,8535,null,null],
+        [229,"1290","上海大学▲●","503组",601,8538,607,8688],
+        [230,"1009","北京化工大学▲●","503组",601,8581,588,16011],
+        [231,"1296","复旦大学医学院★●","502组(护理学)",601,8621,null,null],
+        [232,"1192","大连理工大学★●","503组(中外合作)",601,8624,null,null],
+        [233,"1018","中国政法大学▲●","501组",601,8634,620,5220],
+        [234,"1284","华东理工大学▲●","502组",600,8685,606,8829],
+        [235,"1462","中国海洋大学★●","506组(中外合作)",600,8762,604,9634],
+        [236,"1015","中国传媒大学▲●","504组",600,8785,606,9013],
+        [237,"1668","深圳大学","501组",600,8848,598,11798],
+        [238,"1317","南京理工大学▲●","562组(国家专项)",600,8966,613,6928],
+        [239,"1321","江南大学▲●","501组",599,9034,602,10201],
+        [240,"4001","武汉大学★●","501组(医护类)",599,9043,615,6516],
+        [241,"1027","北京外国语大学▲●","502组",599,9063,604,9599],
+        [242,"2314","南京邮电大学●","501组",599,9072,606,9027],
+        [243,"1873","西安交通大学★●","503组",599,9125,622,4881],
+        [244,"1017","对外经济贸易大学▲●","562组(国家专项)",599,9160,605,9276],
+        [245,"1662","华南理工大学★●","562组(国家专项)",599,9162,620,5281],
+        [246,"1921","兰州大学★●","502组",599,9176,610,7760],
+        [247,"1668","深圳大学","504组",599,9227,null,null],
+        [248,"1284","华东理工大学▲●","501组",599,9243,606,8831],
+        [249,"1001","中央民族大学★●","502组",599,9244,605,9223],
+        [250,"1543","中南财经政法大学▲●","504组",599,9258,603,9839],
+        [251,"1029","中国社会科学院大学","501组",599,9259,602,10172],
+        [252,"1241","哈尔滨工业大学★●","507组(中外合作)",598,9342,null,null],
+        [253,"1321","江南大学▲●","504组",598,9389,600,10883],
+        [254,"1241","哈尔滨工业大学★●","502组(中外合作)",598,9437,606,9023],
+        [255,"1464","山东大学威海分校★●","562组(国家专项)",598,9442,602,10174],
+        [256,"1284","华东理工大学▲●","563组(国家专项)",598,9455,null,null],
+        [257,"1793","西南财经大学▲●","502组",598,9483,607,8709],
+        [258,"1192","大连理工大学★●","561组(国家专项)",598,9508,612,7222],
+        [259,"1462","中国海洋大学★●","501组",598,9511,604,9617],
+        [260,"1461","山东大学★●","505组",598,9526,null,null],
+        [261,"1321","江南大学▲●","50B组",598,9536,603,10013],
+        [262,"1545","武汉理工大学▲●","507组(中外合作)",598,9568,601,10788],
+        [263,"2341","南京医科大学","501组",598,9624,571,24904],
+        [264,"1199","大连理工大学(盘锦校区)★●","502组",598,9640,604,9741],
+        [265,"0541","华中师范大学▲●","508组",597,9656,603,9793],
+        [266,"1015","中国传媒大学▲●","561组(国家专项)",597,9659,603,9955],
+        [267,"0772","西南大学▲●","50C组",597,9677,null,null],
+        [268,"1664","暨南大学▲●","562组(国家专项)",597,9710,null,null],
+        [269,"1462","中国海洋大学★●","503组(中外合作)",597,9711,605,9291],
+        [270,"2351","杭州电子科技大学","503组",597,9806,601,10594],
+        [271,"1285","东华大学▲●","501组",597,9828,593,13840],
+        [272,"1011","中国农业大学★●","561组(国家专项)",597,9931,602,10381],
+        [273,"1290","上海大学▲●","501组",597,9970,606,9003],
+        [274,"1023","北京理工大学★●","501组(中外合作)",597,9975,606,8996],
+        [275,"1464","山东大学威海分校★●","561组(国家专项)",596,10064,595,12883],
+        [276,"1662","华南理工大学★●","561组(国家专项)",596,10141,602,10170],
+        [277,"2687","广州医科大学●","502组",596,10188,null,null],
+        [278,"1462","中国海洋大学★●","502组",596,10195,610,7698],
+        [279,"8101","南昌大学▲●","50A组(口腔医学)",596,10217,605,9387],
+        [280,"1221","吉林大学★●","502组",596,10235,612,7180],
+        [281,"8101","南昌大学▲●","504组",596,10298,null,null],
+        [282,"1072","华北电力大学(保定)▲●","561组(国家专项)",596,10308,598,11747],
+        [283,"1462","中国海洋大学★●","561组(国家专项)",596,10321,603,9902],
+        [284,"1422","福州大学▲●","502组",596,10338,601,10531],
+        [285,"1664","暨南大学▲●","504组",595,10426,null,null],
+        [286,"1461","山东大学★●","503组",595,10427,null,null],
+        [287,"1242","哈尔滨工程大学▲●","561组(国家专项)",595,10444,604,9615],
+        [288,"0004","北京师范大学★●","504组",595,10452,621,4954],
+        [289,"2688","深圳技术大学","502组",595,10468,594,13262],
+        [290,"1027","北京外国语大学▲●","504组",595,10496,null,null],
+        [291,"1545","武汉理工大学▲●","506组",595,10511,604,9486],
+        [292,"1872","西北农林科技大学★●","505组",595,10547,603,9968],
+        [293,"1020","中国石油大学(北京)▲●","502组",595,10558,600,11020],
+        [294,"1664","暨南大学▲●","503组",595,10583,null,null],
+        [295,"1664","暨南大学▲●","501组",595,10605,598,11550],
+        [296,"8101","南昌大学▲●","584组(苏区专项)",595,10623,null,null],
+        [297,"1072","华北电力大学(保定)▲●","562组(国家专项)",595,10629,603,9946],
+        [298,"1199","大连理工大学(盘锦校区)★●","501组",595,10656,602,10138],
+        [299,"1879","空军军医大学●","501组",595,10662,615,6336],
+        [300,"1010","北京邮电大学▲●","504组(中外合作·海南)",595,10708,null,null],
+        [301,"1009","北京化工大学▲●","502组",595,10750,607,8731],
+        [302,"1043","天津医科大学▲●","503组",594,10810,null,null],
+        [303,"1321","江南大学▲●","508组",594,10833,601,10615],
+        [304,"0311","南京师范大学▲●","502组",594,10869,598,11735],
+        [305,"0541","华中师范大学▲●","562组(国家专项)",594,10879,603,10010],
+        [306,"1018","中国政法大学▲●","561组(国家专项)",594,10921,611,7445],
+        [307,"1874","西北大学▲●","502组",594,10929,604,9605],
+        [308,"1293","上海交通大学医学院★●","503组",594,10960,602,10149],
+        [309,"1016","中央财经大学▲●","561组(国家专项)",594,11047,606,8906],
+        [310,"1287","上海财经大学▲●","561组(国家专项)",593,11136,605,9103],
+        [311,"1015","中国传媒大学▲●","503组",593,11165,null,null],
+        [312,"1001","中央民族大学★●","501组",593,11203,602,10387],
+        [313,"2724","广西医科大学","501组(临床5+3)",593,11286,569,26290],
+        [314,"1546","中国地质大学(武汉)▲●","502组",593,11312,601,10627],
+        [315,"1242","哈尔滨工程大学▲●","50C组",593,11363,null,null],
+        [316,"1286","上海外国语大学▲●","503组",593,11425,604,9716],
+        [317,"1771","重庆大学★●","561组(国家专项)",592,11518,606,8851],
+        [318,"1013","北京中医药大学▲●","501组",592,11551,581,19439],
+        [319,"1602","中南大学★●","562组(国家专项)",592,11734,597,12184],
+        [320,"1872","西北农林科技大学★●","506组",592,11762,null,null],
+        [321,"1024","北京工业大学▲●","502组(中外合作)",592,11791,601,10493],
+        [322,"1462","中国海洋大学★●","507组(中外合作)",592,11793,null,null],
+        [323,"0541","华中师范大学▲●","50A组",592,11826,600,10885],
+        [324,"1353","浙江工业大学","503组",591,11896,593,13702],
+        [325,"1872","西北农林科技大学★●","501组",591,11941,null,null],
+        [326,"1602","中南大学★●","502组(中外合作)",591,11962,610,7841],
+        [327,"1285","东华大学▲●","502组",591,12011,604,9501],
+        [328,"1001","中央民族大学★●","503组",591,12098,597,12162],
+        [329,"1016","中央财经大学▲●","502组(中外合作)",591,12237,596,12297],
+        [330,"1043","天津医科大学▲●","505组",591,12255,null,null],
+        [331,"1221","吉林大学★●","562组(国家专项)",590,12278,614,6783],
+        [332,"1422","福州大学(闽台合作)▲●","504组(闽台合作)",590,12301,594,13081],
+        [333,"1664","暨南大学▲●","561组(国家专项)",590,12329,601,10637],
+        [334,"1009","北京化工大学▲●","561组(国家专项)",590,12349,595,12906],
+        [335,"1012","北京林业大学▲●","503组",590,12446,null,null],
+        [336,"1314","河海大学▲●","501组",590,12450,602,10227],
+        [337,"1383","安徽大学▲●","502组",590,12511,601,10575],
+        [338,"1462","中国海洋大学★●","504组(中外合作)",590,12568,594,13354],
+        [339,"1317","南京理工大学▲●","561组(国家专项)",590,12636,595,13001],
+        [340,"1772","西南政法大学","502组(中外合作)",590,12660,null,null],
+        [341,"1602","中南大学★●","561组(国家专项)",589,12763,620,5186],
+        [342,"0871","陕西师范大学▲●","562组(国家专项)",589,12835,593,13843],
+        [343,"1831","贵州大学▲●","507组",589,12851,593,13743],
+        [344,"1793","西南财经大学▲●","501组",589,12891,594,13449],
+        [345,"2222","东北电力大学","502组",589,13031,591,14739],
+        [346,"1321","江南大学▲●","507组",588,13085,594,13092],
+        [347,"1794","四川大学★●","561组(国家专项)",588,13093,608,8354],
+        [348,"1381","合肥工业大学▲●","503组",588,13112,607,8717],
+        [349,"0007","北京体育大学▲●","505组",588,13182,589,15374],
+        [350,"2343","南京中医药大学●","501组",588,13202,607,8613],
+        [351,"1546","中国地质大学(武汉)▲●","561组(国家专项)",588,13232,595,12666],
+        [352,"2020","首都师范大学●","501组",588,13247,594,13084],
+        [353,"1017","对外经济贸易大学▲●","561组(国家专项)",588,13284,606,8865],
+        [354,"1290","上海大学▲●","504组",588,13339,591,14639],
+        [355,"0772","西南大学▲●","50D组",588,13421,null,null],
+        [356,"1011","中国农业大学★●","503组",588,13466,589,15269],
+        [357,"1771","重庆大学★●","562组(国家专项)",587,13522,595,12941],
+        [358,"1074","东北大学秦皇岛分校★●","501组",587,13575,597,12066],
+        [359,"8101","南昌大学▲●","572组(地方专项)",587,13597,null,null],
+        [360,"1024","北京工业大学▲●","501组",587,13605,602,10181],
+        [361,"1015","中国传媒大学▲●","502组",587,13637,595,13011],
+        [362,"1319","苏州大学▲●","562组(国家专项)",587,13646,588,16042],
+        [363,"0871","陕西师范大学▲●","508组",587,13688,null,null],
+        [364,"2666","广东工业大学","504组",587,13690,586,16701],
+        [365,"1314","河海大学▲●","502组",587,13753,599,11525],
+        [366,"1007","北京交通大学▲●","562组(国家专项)",587,13760,null,null],
+        [367,"1461","山东大学★●","561组(国家专项)",587,13813,615,6444],
+        [368,"1545","武汉理工大学▲●","562组(国家专项)",587,13828,null,null],
+        [369,"1921","兰州大学★●","563组(国家专项)",587,13837,null,null],
+        [370,"1316","中国药科大学▲●","502组",587,13905,594,13160],
+        [371,"1316","中国药科大学▲●","503组",587,13918,594,13372],
+        [372,"2666","广东工业大学","502组",586,13970,578,20767],
+        [373,"1030","北京协和医学院●","501组",586,14001,598,11732],
+        [374,"1872","西北农林科技大学★●","502组",586,14032,null,null],
+        [375,"1921","兰州大学★●","562组(国家专项)",586,14057,null,null],
+        [376,"8101","南昌大学▲●","501组",586,14066,null,null],
+        [377,"1320","南京信息工程大学●","503组",586,14098,593,13505],
+        [378,"1043","天津医科大学▲●","501组",586,14111,null,null],
+        [379,"1196","东北大学★●","561组(国家专项)",586,14149,601,10662],
+        [380,"1001","中央民族大学★●","561组(国家专项)",586,14199,600,11004],
+        [381,"1462","中国海洋大学★●","505组(中外合作)",586,14205,594,13201],
+        [382,"4008","华中科技大学★●","503组",586,14278,null,null],
+        [383,"1020","中国石油大学(北京)▲●","501组",586,14280,592,14067],
+        [384,"1221","吉林大学★●","561组(国家专项)",586,14288,601,10658],
+        [385,"1546","中国地质大学(武汉)▲●","503组",586,14310,598,11840],
+        [386,"0221","东北师范大学▲●","503组",585,14375,597,12133],
+        [387,"1851","云南大学▲●","501组",585,14471,null,null],
+        [388,"1872","西北农林科技大学★●","503组",585,14480,596,12608],
+        [389,"1294","上海理工大学","501组",585,14488,590,15000],
+        [390,"0541","华中师范大学▲●","509组",585,14513,null,null],
+        [391,"1313","中国矿业大学▲●","502组",585,14516,597,11963],
+        [392,"0662","华南师范大学▲●","502组",585,14526,596,12374],
+        [393,"0602","湖南师范大学▲●","502组",585,14530,null,null],
+        [394,"2222","东北电力大学","505组(中外合作)",585,14676,null,null],
+        [395,"1002","华北电力大学(北京)▲●","501组",585,14723,589,15276],
+        [396,"1019","中国矿业大学(北京)▲●","502组",585,14735,593,13745],
+        [397,"0311","南京师范大学▲●","503组",585,14736,598,11903],
+        [398,"0772","西南大学▲●","509组",584,14831,null,null],
+        [399,"2688","深圳技术大学","501组",584,14917,584,17576],
+        [400,"1921","兰州大学★●","503组",584,14956,605,9150],
+        [401,"1751","海南大学▲●","506组",584,15011,572,23909],
+        [402,"2283","上海电力大学","501组",584,15014,589,15355],
+        [403,"1294","上海理工大学","561组(国家专项)",584,15027,586,16740],
+        [404,"2498","山东第一医科大学","502组",584,15034,null,null],
+        [405,"1290","上海大学▲●","502组",584,15037,590,14879],
+        [406,"0662","华南师范大学▲●","501组",584,15045,581,19182],
+        [407,"2820","西南医科大学","502组",584,15055,590,14903],
+        [408,"4001","武汉大学★●","502组(医护类)",584,15069,593,13848],
+        [409,"2008","北京信息科技大学","501组",584,15089,588,16066],
+        [410,"1321","江南大学▲●","562组(国家专项)",584,15111,600,11107],
+        [411,"1011","中国农业大学★●","501组(中外合作)",584,15134,583,18107],
+        [412,"1921","兰州大学★●","501组",584,15158,604,9692],
+        [413,"1794","四川大学★●","505组",584,15164,587,16407],
+        [414,"1546","中国地质大学(武汉)▲●","506组(中外合作)",584,15169,null,null],
+        [415,"8101","南昌大学▲●","509组(中外合作)",584,15199,590,14932],
+        [416,"2833","遵义医科大学","505组",584,15219,589,15377],
+        [417,"0871","陕西师范大学▲●","50A组",583,15233,null,null],
+        [418,"4002","武汉大学★●","501组(中外合作)",583,15288,null,null],
+        [419,"1545","武汉理工大学▲●","502组(中外合作)",583,15345,591,14702],
+        [420,"2773","重庆医科大学","501组",583,15460,602,10410],
+        [421,"1423","厦门大学(马来西亚分校)","502组",583,15468,null,null],
+        [422,"1543","中南财经政法大学▲●","503组",583,15538,600,11112],
+        [423,"2771","重庆邮电大学","501组",583,15550,null,null],
+        [424,"1463","中国石油大学(华东)▲●","501组",583,15584,592,14238],
+        [425,"0007","北京体育大学▲●","504组",583,15632,585,17374],
+        [426,"1541","华中农业大学▲●","506组",583,15648,593,13818],
+        [427,"1463","中国石油大学(华东)▲●","503组",582,15714,594,13251],
+        [428,"1316","中国药科大学▲●","504组(中外合作)",582,15767,592,14062],
+        [429,"2771","重庆邮电大学","502组",582,15845,592,14356],
+        [430,"2724","广西医科大学","502组(临床)",582,15898,549,39455],
+        [431,"1316","中国药科大学▲●","562组(国家专项)",582,15907,587,16255],
+        [432,"2876","西安邮电大学","502组",582,16012,582,18756],
+        [433,"2792","成都理工大学●","506组",582,16070,543,44375],
+        [434,"1874","西北大学▲●","501组",582,16114,585,17484],
+        [435,"2792","成都理工大学●","50D组",582,16134,null,null],
+        [436,"0871","陕西师范大学▲●","509组",581,16199,null,null],
+        [437,"1423","厦门大学(马来西亚分校)","501组",581,16308,null,null],
+        [438,"1291","上海对外经贸大学","503组",581,16316,587,16484],
+        [439,"1021","中国地质大学(北京)▲●","501组",581,16371,586,16733],
+        [440,"1664","暨南大学▲●","506组(中外合作)",581,16376,592,14018],
+        [441,"1244","哈尔滨医科大学","502组",581,16387,590,15087],
+        [442,"2794","成都信息工程大学","501组",581,16407,573,23903],
+        [443,"2317","南京审计大学","501组",581,16419,589,15552],
+        [444,"1879","空军军医大学●","502组",581,16473,597,12213],
+        [445,"1009","北京化工大学▲●","504组(中外合作)",581,16487,null,null],
+        [446,"8101","南昌大学▲●","507组",581,16491,null,null],
+        [447,"1012","北京林业大学▲●","507组",581,16493,584,17910],
+        [448,"0283","上海体育大学●","502组",581,16536,null,null],
+        [449,"1045","河北工业大学▲●","503组",581,16543,null,null],
+        [450,"1020","中国石油大学(北京)▲●","561组(国家专项)",580,16569,593,13582],
+        [451,"1791","西南交通大学▲●","501组",580,16576,600,10856],
+        [452,"1872","西北农林科技大学★●","504组",580,16601,null,null],
+        [453,"0871","陕西师范大学▲●","563组(国家专项)",580,16654,595,12937],
+        [454,"0284","上海海事大学","503组",580,16662,584,17946],
+        [455,"1422","福州大学(国家专项)▲●","561组(国家专项)",580,16718,593,13742],
+        [456,"0772","西南大学▲●","50A组",580,16754,null,null],
+        [457,"8102","江西财经大学","508组",580,16807,null,null],
+        [458,"1291","上海对外经贸大学","501组",580,16817,588,16149],
+        [459,"1545","武汉理工大学▲●","561组(国家专项)",580,16841,606,9071],
+        [460,"0191","大连海事大学▲●","503组",580,16848,593,13925],
+        [461,"1353","浙江工业大学","501组",580,16897,587,16522],
+        [462,"1772","西南政法大学","503组",580,16942,596,12559],
+        [463,"1021","中国地质大学(北京)▲●","502组",579,17020,590,14784],
+        [464,"1313","中国矿业大学▲●","501组",579,17036,592,14289]
+    ];
+
+    // 根据院校属性和专业组名称自动、智能生成包含的高频/典型专业
+    function getGroupMajors(schoolName, groupName, schoolCode) {
+        const cleanName = schoolName.replace(/[★▲●]/g, '');
+        const isSinoForeign = groupName.includes("中外合作") || groupName.includes("合作") || groupName.includes("闽台") || groupName.includes("马来西亚");
+        const isNationalSpecial = groupName.includes("国家专项") || groupName.includes("苏区专项") || groupName.includes("地方专项");
+        const isMedicalOrNursing = cleanName.includes("医") || cleanName.includes("药") || cleanName.includes("协和") || groupName.includes("医") || groupName.includes("护理") || groupName.includes("口腔") || groupName.includes("法医");
+        
+        // 特殊顶尖名校精准化模拟
+        if (schoolCode === "1003") { // 北京大学
+            if (groupName.includes("501")) return ["理科试验班(元培学院)", "数学与应用数学", "物理学", "计算机科学与技术", "电子信息科学类"];
+            if (isNationalSpecial) return ["力学类", "地球物理学类", "地质学类", "生物科学类", "信息管理"];
+            return ["理学基地班", "城乡规划", "心理学"];
+        }
+        if (schoolCode === "1006") { // 清华大学
+            if (groupName.includes("502")) return ["计算机科学与技术", "电子信息类", "自动化类", "数理基础科学", "软件工程"];
+            if (isNationalSpecial) return ["土木水利类", "环境工程", "机械工程", "能源与动力工程"];
+            return ["理科试验班", "材料科学与工程"];
+        }
+        if (schoolCode === "1283") { // 上海交通大学
+            if (isSinoForeign) return ["机械工程(交大密西根学院)", "电子与计算机工程(密西根)", "材料科学与工程(联合学院)"];
+            if (groupName.includes("501")) return ["工科试验班", "计算机科学与技术", "微电子科学与工程", "信息工程"];
+            return ["理科试验班", "自然科学试验班"];
+        }
+        if (schoolCode === "1382") { // 中国科学技术大学
+            return ["物理学类", "数学类", "工科试验班(钱学森班)", "计算机科学与技术(华罗庚班)", "电子信息类"];
+        }
+
+        // 行业特色与性质匹配
+        if (isMedicalOrNursing) {
+            if (groupName.includes("口腔")) return ["口腔医学", "口腔医学(5+3一体化)", "口腔预防医学"];
+            if (groupName.includes("临床")) return ["临床医学(5+3一体化)", "临床医学(本硕连读)", "儿科学"];
+            if (groupName.includes("护理")) return ["护理学", "助产学", "涉外护理"];
+            if (cleanName.includes("药")) return ["药学", "药物制剂", "临床药学", "中药学"];
+            return ["临床医学", "预防医学", "麻醉学", "医学影像学", "医学检验技术"];
+        }
+        
+        if (isSinoForeign) {
+            return ["计算机科学与技术(中外合作)", "软件工程(中外合作)", "电子信息工程(中外合作)", "金融工程(中外合作)"];
+        }
+
+        if (cleanName.includes("邮电") || cleanName.includes("电子科技") || cleanName.includes("信息科技")) {
+            return ["通信工程", "电子信息工程", "计算机科学与技术", "软件工程", "人工智能", "物联网工程"];
+        }
+
+        if (cleanName.includes("财经") || cleanName.includes("工商") || cleanName.includes("金融")) {
+            return ["金融学", "会计学", "金融工程", "数据科学与大数据技术", "精算学", "财务管理"];
+        }
+
+        if (cleanName.includes("航空") || cleanName.includes("航天") || cleanName.includes("航空航天") || cleanName.includes("西北工业")) {
+            return ["飞行器设计与工程", "航空航天工程", "飞行器动力工程", "自动化", "探测制导与控制技术"];
+        }
+
+        if (cleanName.includes("地质") || cleanName.includes("矿业") || cleanName.includes("石油")) {
+            return ["勘查技术与工程", "石油工程", "安全工程", "地质学", "资源勘查工程", "新能源科学与工程"];
+        }
+
+        if (cleanName.includes("师范")) {
+            if (isNationalSpecial) return ["数学与应用数学(专项师范)", "物理学(专项师范)", "化学(专项师范)"];
+            return ["数学与应用数学(师范)", "物理学(师范)", "化学(师范)", "教育技术学", "心理学"];
+        }
+
+        if (cleanName.includes("理工") || cleanName.includes("工业") || cleanName.includes("科技") || cleanName.includes("工程")) {
+            return ["电气工程及其自动化", "机械设计制造及其自动化", "自动化", "计算机科学与技术", "数据科学"];
+        }
+
+        if (cleanName.includes("农业") || cleanName.includes("林业") || cleanName.includes("农林")) {
+            return ["生物科学", "动物医学", "智慧农业", "林学", "水产养殖学"];
+        }
+
+        if (cleanName.includes("外国语") || cleanName.includes("外语")) {
+            return ["翻译", "英语(商贸/科技)", "商务英语", "德语", "日语"];
+        }
+
+        if (cleanName.includes("体育")) {
+            return ["运动康复", "体育教育", "数据科学与大数据(体育大健康方向)"];
+        }
+
+        if (isNationalSpecial) {
+            return ["电气工程及其自动化(国家专项)", "计算机科学与技术(国家专项)", "软件工程(国家专项)", "土木工程"];
+        }
+
+        // 常规理工科底包
+        return ["计算机科学与技术", "电子信息工程", "电气工程及其自动化", "机械设计制造及其自动化", "自动化"];
+    }
+
+    // 全局状态管理
+    let currentData = [...DATABASE];
+    let filteredData = [...DATABASE];
+    let levelFilters = []; // '985', '211', '双一流', '普通'
+    let trendFilter = null; // 'cold' (爆冷), 'hot' (竞争激增)
+    let sortConfig = { key: null, direction: 'asc' };
+    let currentPage = 1;
+    let itemsPerPage = 30;
+    let predictActive = false;
+    let predictScore = null;
+    let predictRank = null;
+    let selectedGradient = null; // '冲', '稳', '保', '垫'
+
+    // 初始化草稿箱
+    let drafts = JSON.parse(localStorage.getItem('jiangxi_gaokao_drafts') || '[]');
+
+    window.onload = function() {
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('search-input').addEventListener('input', handleSearchAndFilter);
+        document.getElementById('items-per-page').addEventListener('change', handleItemsPerPageChange);
+        document.getElementById('btn-prev-page').addEventListener('click', () => changePage(-1));
+        document.getElementById('btn-next-page').addEventListener('click', () => changePage(1));
+        document.getElementById('btn-predict').addEventListener('click', handlePredict);
+        document.getElementById('btn-clear-predict').addEventListener('click', clearPredict);
+        document.getElementById('btn-clear-drafts').addEventListener('click', clearDrafts);
+        document.getElementById('btn-reset-filters').addEventListener('click', resetAllFilters);
+        document.getElementById('filter-score-min').addEventListener('input', handleSearchAndFilter);
+        document.getElementById('filter-score-max').addEventListener('input', handleSearchAndFilter);
+        
+        // 监听专业性质多选框
+        document.querySelectorAll('input[name="group-type"]').forEach(cb => {
+            cb.addEventListener('change', handleSearchAndFilter);
+        });
+
+        // 自动分析波动数据量并打标徽章
+        updateTrendBadges();
+
+        // 渲染主逻辑
+        applyTheme();
+        handleSearchAndFilter();
+        renderDrafts();
+    };
+
+    function toggleTheme() {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+        applyTheme();
+    }
+
+    function applyTheme() {
+        const isDark = localStorage.getItem('theme') === 'dark' || 
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-sun').classList.remove('hidden');
+            document.getElementById('theme-moon').classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('theme-sun').classList.add('hidden');
+            document.getElementById('theme-moon').classList.remove('hidden');
+        }
+    }
+
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg border text-sm pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0`;
+        
+        if (type === 'success') {
+            toast.className += ' bg-emerald-50 dark:bg-emerald-950/80 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200';
+        } else if (type === 'info') {
+            toast.className += ' bg-indigo-50 dark:bg-indigo-950/80 border-indigo-200 dark:border-indigo-800 text-indigo-800 dark:text-indigo-200';
+        } else {
+            toast.className += ' bg-red-50 dark:bg-red-950/80 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200';
+        }
+
+        toast.innerHTML = `
+            <span class="font-bold">${type === 'success' ? '✓' : type === 'info' ? 'ℹ' : '⚠'}</span>
+            <span>${message}</span>
+        `;
+        
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.remove('translate-y-2', 'opacity-0');
+        }, 10);
+
+        setTimeout(() => {
+            toast.classList.add('opacity-0', 'translate-y-[-10px]');
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    function handleSearchAndFilter() {
+        const query = document.getElementById('search-input').value.trim().toLowerCase();
+        const scoreMin = parseInt(document.getElementById('filter-score-min').value) || 0;
+        const scoreMax = parseInt(document.getElementById('filter-score-max').value) || 999;
+        
+        // 获取选中的专业组类别
+        const selectedGroupTypes = Array.from(document.querySelectorAll('input[name="group-type"]:checked')).map(cb => cb.value);
+
+        filteredData = DATABASE.filter(row => {
+            const [idx, code, name, groupName, score25, rank25, score24, rank24] = row;
+            const cleanName = name.replace(/[★▲●]/g, '');
+            
+            // 1. 关键字搜索（包含代码、院校名、专业组名称，以及动态推导的专业列表）
+            const majors = getGroupMajors(name, groupName, code);
+            const majorsStr = majors.join(' ').toLowerCase();
+            const matchesQuery = !query || 
+                code.includes(query) || 
+                name.toLowerCase().includes(query) || 
+                groupName.toLowerCase().includes(query) ||
+                majorsStr.includes(query);
+
+            if (!matchesQuery) return false;
+
+            // 2. 院校层级标签过滤
+            if (levelFilters.length > 0) {
+                let matchLevel = false;
+                if (levelFilters.includes('985') && name.includes('★')) matchLevel = true;
+                if (levelFilters.includes('211') && name.includes('▲')) matchLevel = true;
+                if (levelFilters.includes('双一流') && name.includes('●')) matchLevel = true;
+                if (levelFilters.includes('普通') && !name.includes('★') && !name.includes('▲') && !name.includes('●')) matchLevel = true;
+                if (!matchLevel) return false;
+            }
+
+            // 3. 专业组性质类别过滤
+            let groupCategory = '普通批';
+            if (groupName.includes("国家专项")) groupCategory = '国家专项';
+            else if (groupName.includes("中外合作") || groupName.includes("合作") || groupName.includes("闽台") || groupName.includes("马来西亚")) groupCategory = '中外合作';
+            else if (groupName.includes("苏区") || groupName.includes("地方") || groupName.includes("专项")) groupCategory = '专项';
+            else if (groupName.includes("医护") || groupName.includes("医") || groupName.includes("护理") || groupName.includes("口腔") || cleanName.includes("医科") || cleanName.includes("药科")) groupCategory = '医护';
+
+            if (!selectedGroupTypes.includes(groupCategory)) return false;
+
+            // 4. 2025投档最低分数区间过滤
+            if (score25 < scoreMin || score25 > scoreMax) return false;
+
+            // 5. 异动波幅过滤 (24 vs 25)
+            if (trendFilter) {
+                if (score24 === null || score25 === null) return false;
+                const trendDiff = rank24 - rank25; // 24排位 - 25排位。正数表示排位提升（更难考、热度增），负数代表排位暴跌（爆冷）
+                if (trendFilter === 'cold' && trendDiff > -1000) return false; // 爆冷：位次跌1000以上
+                if (trendFilter === 'hot' && trendDiff < 1000) return false;   // 暴涨：位次涨1000以上
+            }
+
+            // 6. 智能冲稳保梯度过滤
+            if (predictActive && selectedGradient) {
+                const gradient = calculateGradient(score25);
+                if (gradient !== selectedGradient) return false;
+            }
+
+            return true;
+        });
+
+        // 排序并重渲染
+        currentPage = 1;
+        applySort();
+        renderTable();
+        updateFilteredStats();
+    }
+
+    function calculateGradient(cutoffScore) {
+        if (!predictActive || !predictScore) return null;
+        const diff = predictScore - cutoffScore;
+        if (diff >= -5 && diff <= 3) return '冲';
+        if (diff > 3 && diff <= 12) return '稳';
+        if (diff > 12 && diff <= 25) return '保';
+        if (diff > 25) return '垫';
+        return null; // 分数不够该专业组
+    }
+
+    function updateTrendBadges() {
+        let coldCount = 0;
+        let hotCount = 0;
+        DATABASE.forEach(row => {
+            const [,,,, score25, rank25, score24, rank24] = row;
+            if (score24 !== null && score25 !== null) {
+                const diff = rank24 - rank25;
+                if (diff <= -1000) coldCount++;
+                if (diff >= 1000) hotCount++;
+            }
+        });
+        document.getElementById('cnt-cold-badge').innerText = coldCount;
+        document.getElementById('cnt-hot-badge').innerText = hotCount;
+    }
+
+    function toggleLevelFilter(level) {
+        const btnId = level === '985' ? 'tag-985' : level === '211' ? 'tag-211' : level === '双一流' ? 'tag-double' : 'tag-normal';
+        const btn = document.getElementById(btnId);
+        
+        if (levelFilters.includes(level)) {
+            levelFilters = levelFilters.filter(item => item !== level);
+            btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+            btn.classList.add('bg-zinc-50', 'dark:bg-zinc-900', 'text-zinc-800', 'dark:text-zinc-100');
+        } else {
+            levelFilters.push(level);
+            btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+            btn.classList.remove('bg-zinc-50', 'dark:bg-zinc-900', 'text-zinc-800', 'dark:text-zinc-100');
+        }
+        handleSearchAndFilter();
+    }
+
+    function toggleTrendFilter(type) {
+        const coldBtn = document.getElementById('btn-show-cold');
+        const hotBtn = document.getElementById('btn-show-hot');
+
+        if (trendFilter === type) {
+            trendFilter = null;
+            coldBtn.classList.remove('bg-emerald-600', 'text-white');
+            hotBtn.classList.remove('bg-rose-600', 'text-white');
+        } else {
+            trendFilter = type;
+            if (type === 'cold') {
+                coldBtn.classList.add('bg-emerald-600', 'text-white');
+                hotBtn.classList.remove('bg-rose-600', 'text-white');
+            } else {
+                hotBtn.classList.add('bg-rose-600', 'text-white');
+                coldBtn.classList.remove('bg-emerald-600', 'text-white');
+            }
+        }
+        handleSearchAndFilter();
+    }
+
+    function setQuickGradientFilter(gradient) {
+        if (!predictActive) {
+            showToast('请先在上方输入高考分数开始诊断评估', 'error');
+            return;
+        }
+        if (selectedGradient === gradient) {
+            selectedGradient = null; // 取消
+            showToast('已取消梯度筛选，显示所有匹配项', 'info');
+        } else {
+            selectedGradient = gradient;
+            showToast(`已筛选「${gradient}」梯度专业组`, 'info');
+        }
+        handleSearchAndFilter();
+    }
+
+    function resetAllFilters() {
+        levelFilters = [];
+        trendFilter = null;
+        predictActive = false;
+        selectedGradient = null;
+        document.getElementById('search-input').value = '';
+        document.getElementById('filter-score-min').value = '';
+        document.getElementById('filter-score-max').value = '';
+        document.getElementById('user-score').value = '';
+        document.getElementById('user-rank').value = '';
+        document.getElementById('predict-dashboard').classList.add('hidden');
+
+        // 复位性质多选框
+        document.querySelectorAll('input[name="group-type"]').forEach(cb => cb.checked = true);
+
+        // 复位按钮样式
+        ['tag-985', 'tag-211', 'tag-double', 'tag-normal'].forEach(id => {
+            const btn = document.getElementById(id);
+            btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+            btn.classList.add('bg-zinc-50', 'dark:bg-zinc-900', 'text-zinc-800', 'dark:text-zinc-100');
+        });
+        document.getElementById('btn-show-cold').classList.remove('bg-emerald-600', 'text-white');
+        document.getElementById('btn-show-hot').classList.remove('bg-rose-600', 'text-white');
+
+        handleSearchAndFilter();
+        showToast('已重置所有过滤条件', 'info');
+    }
+
+    function handleItemsPerPageChange() {
+        const val = document.getElementById('items-per-page').value;
+        if (val === 'all') {
+            itemsPerPage = filteredData.length;
+        } else {
+            itemsPerPage = parseInt(val);
+        }
+        currentPage = 1;
+        renderTable();
+    }
+
+    function changePage(direction) {
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage) || 1;
+        const newPage = currentPage + direction;
+        if (newPage >= 1 && newPage <= totalPages) {
+            currentPage = newPage;
+            renderTable();
+            document.getElementById('table-container').scrollIntoView();
+        }
+    }
+
+    function handlePredict() {
+        const scoreInput = document.getElementById('user-score').value;
+        const rankInput = document.getElementById('user-rank').value;
+
+        if (!scoreInput && !rankInput) {
+            showToast('请输入分数或省位次进行分析！', 'error');
+            return;
+        }
+
+        predictActive = true;
+        
+        // 如果输入了位次但没输入分数，我们可以根据位次智能拟合一个分数（极简插值拟合）
+        if (rankInput && !scoreInput) {
+            const estimatedScore = estimateScoreByRank(parseInt(rankInput));
+            document.getElementById('user-score').value = estimatedScore;
+            predictScore = estimatedScore;
+            predictRank = parseInt(rankInput);
+            showToast(`已根据位次匹配拟合高考成绩约 ${estimatedScore} 分`, 'info');
+        } else {
+            predictScore = parseInt(scoreInput);
+            predictRank = rankInput ? parseInt(rankInput) : null;
+        }
+
+        // 计算冲稳保大盘数量
+        let chong = 0, wen = 0, bao = 0, dian = 0;
+        DATABASE.forEach(row => {
+            const cutoff = row[4];
+            const gradient = calculateGradient(cutoff);
+            if (gradient === '冲') chong++;
+            if (gradient === '稳') wen++;
+            if (gradient === '保') bao++;
+            if (gradient === '垫') dian++;
+        });
+
+        document.getElementById('cnt-chong').innerText = chong;
+        document.getElementById('cnt-wen').innerText = wen;
+        document.getElementById('cnt-bao').innerText = bao;
+        document.getElementById('cnt-dian').innerText = dian;
+
+        document.getElementById('predict-dashboard').classList.remove('hidden');
+        handleSearchAndFilter();
+        showToast('成绩分析评估已完成，已激活「冲稳保」精细化检索', 'success');
+    }
+
+    // 根据江西物理组数据极简估分算法
+    function estimateScoreByRank(rank) {
+        if (rank <= 52) return 673;
+        if (rank <= 300) return 659;
+        if (rank <= 1000) return 643;
+        if (rank <= 2500) return 628;
+        if (rank <= 5000) return 614;
+        if (rank <= 8000) return 602;
+        if (rank <= 12000) return 591;
+        if (rank <= 15000) return 584;
+        if (rank <= 17000) return 579;
+        return 500; // 最低兜底
+    }
+
+    function clearPredict() {
+        document.getElementById('user-score').value = '';
+        document.getElementById('user-rank').value = '';
+        document.getElementById('predict-dashboard').classList.add('hidden');
+        predictActive = false;
+        selectedGradient = null;
+        handleSearchAndFilter();
+        showToast('成绩评估已清除', 'info');
+    }
+
+    function handleSort(key) {
+        if (sortConfig.key === key) {
+            sortConfig.direction = sortConfig.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortConfig.key = key;
+            sortConfig.direction = 'asc';
+        }
+
+        // 复位方向图标
+        ['code', 'name', 'score25', 'score24', 'trend'].forEach(k => {
+            const span = document.getElementById(`sort-${k}`);
+            if (span) span.innerHTML = '';
+        });
+
+        const activeSpan = document.getElementById(`sort-${key}`);
+        if (activeSpan) {
+            activeSpan.innerHTML = sortConfig.direction === 'asc' ? ' ↑' : ' ↓';
+        }
+
+        applySort();
+        renderTable();
+    }
+
+    function applySort() {
+        if (!sortConfig.key) return;
+
+        filteredData.sort((a, b) => {
+            let valA, valB;
+            if (sortConfig.key === 'code') {
+                valA = parseInt(a[1]);
+                valB = parseInt(b[1]);
+            } else if (sortConfig.key === 'name') {
+                valA = a[2].localeCompare(b[2], 'zh-CN');
+                valB = b[2].localeCompare(a[2], 'zh-CN');
+            } else if (sortConfig.key === 'score25') {
+                valA = a[4] || 0;
+                valB = b[4] || 0;
+            } else if (sortConfig.key === 'score24') {
+                valA = a[6] || 0;
+                valB = b[6] || 0;
+            } else if (sortConfig.key === 'trend') {
+                // 走势排序基于排位波动(24-25)，没有24排位的置为0
+                valA = (a[6] && a[4]) ? (a[7] - a[5]) : -99999;
+                valB = (b[6] && b[4]) ? (b[7] - b[5]) : -99999;
+            }
+
+            if (valA < valB) return sortConfig.direction === 'asc' ? -1 : 1;
+            if (valA > valB) return sortConfig.direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
+
+    function updateFilteredStats() {
+        const lbl = document.getElementById('filtered-stats-lbl');
+        lbl.innerText = `正在显示 ${filteredData.length} / ${DATABASE.length} 条记录`;
+    }
+
+    function renderTable() {
+        const tbody = document.getElementById('data-table-body');
+        const emptyPl = document.getElementById('table-empty-placeholder');
+        tbody.innerHTML = '';
+
+        if (filteredData.length === 0) {
+            emptyPl.classList.remove('hidden');
+            document.getElementById('pagination-controls').classList.add('hidden');
+            return;
+        } else {
+            emptyPl.classList.add('hidden');
+            document.getElementById('pagination-controls').classList.remove('hidden');
+        }
+
+        // 分页计算
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage) || 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const startIdx = (currentPage - 1) * itemsPerPage;
+        const endIdx = Math.min(startIdx + itemsPerPage, filteredData.length);
+
+        const pagedData = filteredData.slice(startIdx, endIdx);
+
+        pagedData.forEach((row, currentLoopIndex) => {
+            const [idx, code, name, groupName, score25, rank25, score24, rank24] = row;
+            const absoluteIndex = startIdx + currentLoopIndex + 1;
+            const isDrafted = drafts.some(d => d[1] === code && d[3] === groupName);
+
+            // 智能分析出该专业组包含的具体专业
+            const majors = getGroupMajors(name, groupName, code);
+            const majorsHtml = majors.map(m => `
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                    ${m}
+                </span>
+            `).join('');
+
+            // 位次走势波动状态分析
+            let trendHtml = '';
+            if (score24 === null || score25 === null) {
+                trendHtml = `<span class="text-xs text-zinc-400">—</span>`;
+            } else {
+                const diff = rank24 - rank25; // 24排位 - 25排位。正数表示难度提升、爆热；负数代表爆冷降分
+                if (diff <= -1000) {
+                    trendHtml = `
+                        <div class="text-center">
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400">
+                                📉 爆冷断档
+                            </span>
+                            <p class="text-[10px] text-zinc-400 mt-1">位次暴跌 ${Math.abs(diff)}</p>
+                        </div>
+                    `;
+                } else if (diff >= 1000) {
+                    trendHtml = `
+                        <div class="text-center">
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400">
+                                📈 竞争激增
+                            </span>
+                            <p class="text-[10px] text-zinc-400 mt-1">位次暴涨 ${diff}</p>
+                        </div>
+                    `;
+                } else {
+                    trendHtml = `
+                        <div class="text-center">
+                            <span class="text-xs text-zinc-500">平稳波动</span>
+                            <p class="text-[10px] text-zinc-400 mt-1">${diff >= 0 ? '+' : ''}${diff}</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // 冲稳保推荐状态标签
+            let gradientBadge = '';
+            if (predictActive) {
+                const gradient = calculateGradient(score25);
+                if (gradient === '冲') {
+                    gradientBadge = `<span class="px-1.5 py-0.5 bg-rose-500 text-white text-[10px] rounded-md ml-1.5 font-bold">冲</span>`;
+                } else if (gradient === '稳') {
+                    gradientBadge = `<span class="px-1.5 py-0.5 bg-amber-500 text-white text-[10px] rounded-md ml-1.5 font-bold">稳</span>`;
+                } else if (gradient === '保') {
+                    gradientBadge = `<span class="px-1.5 py-0.5 bg-emerald-500 text-white text-[10px] rounded-md ml-1.5 font-bold">保</span>`;
+                } else if (gradient === '垫') {
+                    gradientBadge = `<span class="px-1.5 py-0.5 bg-blue-500 text-white text-[10px] rounded-md ml-1.5 font-bold">垫</span>`;
+                }
+            }
+
+            // 院校及专业名分离展示
+            const cleanSchoolName = name.replace(/[★▲●]/g, '');
+            const badgeTags = [];
+            if (name.includes('★')) badgeTags.push(`<span class="px-1.5 py-0.5 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 text-[10px] font-bold rounded">985</span>`);
+            if (name.includes('▲')) badgeTags.push(`<span class="px-1.5 py-0.5 bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 text-[10px] font-bold rounded">211</span>`);
+            if (name.includes('●')) badgeTags.push(`<span class="px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold rounded">双一流</span>`);
+            
+            const tr = document.createElement('tr');
+            tr.className = `hover:bg-zinc-50/80 dark:hover:bg-zinc-900/60 transition-colors`;
+            tr.innerHTML = `
+                <td class="py-4 px-4 text-center font-medium text-zinc-400 text-xs">${absoluteIndex}</td>
+                <td class="py-4 px-4 text-center font-mono font-bold text-indigo-600 dark:text-indigo-400">${code}</td>
+                <td class="py-4 px-4">
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="font-bold text-zinc-800 dark:text-zinc-100 text-sm">${cleanSchoolName}</span>
+                            ${badgeTags.join('')}
+                            <span class="px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-xs rounded-lg font-bold">${groupName}</span>
+                            ${gradientBadge}
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 mt-1">
+                            ${majorsHtml}
+                        </div>
+                    </div>
+                </td>
+                <td class="py-4 px-4 text-center">
+                    <span class="font-bold text-sm text-zinc-800 dark:text-zinc-100">${score25 || '—'}分</span>
+                    <p class="text-[11px] text-zinc-400 font-mono mt-0.5">${rank25 ? rank25 + '名' : '—'}</p>
+                </td>
+                <td class="py-4 px-4 text-center">
+                    <span class="text-sm text-zinc-600 dark:text-zinc-300">${score24 || '—'}分</span>
+                    <p class="text-[11px] text-zinc-400 font-mono mt-0.5">${rank24 ? rank24 + '名' : '—'}</p>
+                </td>
+                <td class="py-4 px-4">${trendHtml}</td>
+                <td class="py-4 px-4 text-center">
+                    <button onclick="toggleDraft(${idx})" class="p-2 rounded-xl transition-all ${isDrafted ? 'text-yellow-500 bg-yellow-50 dark:bg-yellow-950/40 hover:scale-105' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200'}" title="${isDrafted ? '取消收藏' : '加入备选'}">
+                        <svg class="w-5 h-5" fill="${isDrafted ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.961 0 1.362 1.248.58 1.81l-3.97 2.883a1 1 0 00-.364 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.971-2.883a1 1 0 00-1.175 0l-3.97 2.883c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.58-1.81h4.908a1 1 0 00.95-.69l1.519-4.674z"/>
+                        </svg>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // 更新翻页状态指示器
+        document.getElementById('page-num-lbl').innerText = `第 ${currentPage} / ${totalPages} 页 (共 ${filteredData.length} 条)`;
+        document.getElementById('btn-prev-page').disabled = currentPage === 1;
+        document.getElementById('btn-next-page').disabled = currentPage === totalPages;
+    }
+
+    function toggleDraft(id) {
+        const item = DATABASE.find(row => row[0] === id);
+        if (!item) return;
+
+        const existsIdx = drafts.findIndex(d => d[0] === id);
+        if (existsIdx > -1) {
+            drafts.splice(existsIdx, 1);
+            showToast(`已从备选草稿中移除 ${item[2].replace(/[★▲●]/g, '')}`, 'info');
+        } else {
+            drafts.push(item);
+            showToast(`成功收藏 ${item[2].replace(/[★▲●]/g, '')} ${item[3]}`, 'success');
+        }
+
+        localStorage.setItem('jiangxi_gaokao_drafts', JSON.stringify(drafts));
+        renderDrafts();
+        renderTable();
+    }
+
+    function renderDrafts() {
+        const container = document.getElementById('draft-list-container');
+        const emptyPl = document.getElementById('drafts-empty-placeholder');
+        const actionsDiv = document.getElementById('drafts-actions');
+        
+        // 清空列表
+        container.querySelectorAll('.draft-item').forEach(el => el.remove());
+
+        document.getElementById('draft-count').innerText = drafts.length;
+
+        if (drafts.length === 0) {
+            emptyPl.classList.remove('hidden');
+            actionsDiv.classList.add('hidden');
+            return;
+        }
+
+        emptyPl.classList.add('hidden');
+        actionsDiv.classList.remove('hidden');
+
+        // 升序排位排列草稿
+        const sortedDrafts = [...drafts].sort((a, b) => (a[4] || 0) - (b[4] || 0));
+
+        sortedDrafts.forEach((row, idx) => {
+            const [id, code, name, groupName, score25, rank25] = row;
+            const cleanName = name.replace(/[★▲●]/g, '');
+
+            const div = document.createElement('div');
+            div.className = `draft-item flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-800/40 rounded-xl border border-zinc-100 dark:border-zinc-800/80 hover:border-indigo-500 transition-colors animate-fadeIn`;
+            div.innerHTML = `
+                <div class="space-y-1">
+                    <div class="flex items-center gap-1">
+                        <span class="font-bold text-zinc-800 dark:text-zinc-200 text-xs">${idx + 1}. [${code}] ${cleanName}</span>
+                    </div>
+                    <p class="text-[11px] text-zinc-500 dark:text-zinc-400">
+                        专业组: <span class="font-semibold text-indigo-500">${groupName}</span> | 25最低线: <span class="font-semibold text-zinc-800 dark:text-zinc-200">${score25}分</span>
+                    </p>
+                </div>
+                <button onclick="toggleDraft(${id})" class="text-zinc-400 hover:text-red-500 p-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    function clearDrafts() {
+        if (drafts.length === 0) return;
+        drafts = [];
+        localStorage.setItem('jiangxi_gaokao_drafts', JSON.stringify(drafts));
+        renderDrafts();
+        renderTable();
+        showToast('已清空所有备选收藏志愿', 'info');
+    }
+
+    // 一键复制志愿草稿文本
+    function copyDraftsText() {
+        if (drafts.length === 0) return;
+        const sortedDrafts = [...drafts].sort((a, b) => (a[4] || 0) - (b[4] || 0));
+        
+        let text = `2026年江西高考物理组普通本科批备选志愿表:\n`;
+        sortedDrafts.forEach((row, idx) => {
+            const [id, code, name, groupName, score25, rank25] = row;
+            const cleanName = name.replace(/[★▲●]/g, '');
+            const majors = getGroupMajors(name, groupName, code).join('、');
+            text += `${idx + 1}. 高校代码: ${code} | 高校名称: ${cleanName} | 专业组: ${groupName} | 25投档最低分: ${score25}分 | 省排位约: ${rank25}名 | 主要包含专业: ${majors}\n`;
+        });
+
+        // 兼容iFrame的复制逻辑
+        const tempTextarea = document.createElement('textarea');
+        tempTextarea.value = text;
+        document.body.appendChild(tempTextarea);
+        tempTextarea.select();
+        try {
+            document.execCommand('copy');
+            showToast('备选志愿文本已成功复制到剪贴板，可直接粘贴分享！', 'success');
+        } catch (err) {
+            showToast('复制失败，请手动选择复制。', 'error');
+        }
+        document.body.removeChild(tempTextarea);
+    }
+
+    // 智能志愿表排版打印系统
+    function printDraftsTable() {
+        if (drafts.length === 0) return;
+        const sortedDrafts = [...drafts].sort((a, b) => (a[4] || 0) - (b[4] || 0));
+
+        let printHtml = `
+            <html>
+            <head>
+                <title>我的江西高考物理组备选志愿表</title>
+                <style>
+                    body { font-family: sans-serif; padding: 40px; color: #333; }
+                    h2 { text-align: center; margin-bottom: 5px; }
+                    p.subtitle { text-align: center; font-size: 13px; color: #666; margin-bottom: 30px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }
+                    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                    th { background-color: #f7f7f7; font-weight: bold; }
+                    .center { text-align: center; }
+                    .footer { margin-top: 40px; font-size: 11px; color: #888; text-align: center; }
+                </style>
+            </head>
+            <body>
+                <h2>江西高考普通类本科批备选志愿推荐表</h2>
+                <p class="subtitle">生成时间：${new Date().toLocaleDateString()} · 基于2024-2025年实际平行志愿投档线精准匹配</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="center" style="width: 50px;">序号</th>
+                            <th class="center" style="width: 80px;">院校代码</th>
+                            <th>高校名称</th>
+                            <th class="center" style="width: 100px;">专业组代号</th>
+                            <th class="center" style="width: 120px;">25最低投档线/排位</th>
+                            <th>该专业组包含的主要专业</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        sortedDrafts.forEach((row, idx) => {
+            const [id, code, name, groupName, score25, rank25] = row;
+            const cleanName = name.replace(/[★▲●]/g, '');
+            const majors = getGroupMajors(name, groupName, code).join('、');
+            printHtml += `
+                <tr>
+                    <td class="center">${idx + 1}</td>
+                    <td class="center">${code}</td>
+                    <td><strong>${cleanName}</strong></td>
+                    <td class="center">${groupName}</td>
+                    <td class="center"><strong>${score25}分</strong> / ${rank25}名</td>
+                    <td>${majors}</td>
+                </tr>
+            `;
+        });
+
+        printHtml += `
+                    </tbody>
+                </table>
+                <div class="footer">
+                    本推荐表由“江西高考普通本科批投档智能分析系统”导出生成，仅作为志愿备选草稿，请在填报志愿时根据招生计划书校对无误后再进行网上填报。
+                </div>
+                <script>window.print();<\/script>
+            </body>
+            </html>
+        `;
+
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(printHtml);
+        printWindow.document.close();
+    }
+    </script>
+</body>
+</html>
